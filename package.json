@@ -1,0 +1,40 @@
+{
+  "name": "personal",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "chart.js": "^2.7.2",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "massive": "^5.2.0",
+    "react": "^16.4.2",
+    "react-chartjs-2": "^2.7.4",
+    "react-dom": "^16.4.2",
+    "react-modal": "^3.5.1",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.5",
+    "react-scrollbar": "^0.5.4",
+    "react-stripe-checkout": "^2.6.3",
+    "redux": "^4.0.0",
+    "stripe": "^6.8.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "main": "server/server.js",
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:3005"
+    },
+    "/auth": {
+      "target": "http://localhost:3005"
+    }
+  }
+}

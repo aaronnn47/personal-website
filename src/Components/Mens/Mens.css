@@ -1,0 +1,22 @@
+.product{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+    margin-bottom: 70px;
+    position: relative;
+    top: 50px;
+    font-family: 'Merriweather', serif;
+}
+
+.product > button{
+    height: 80%;
+    width: 40%;
+    margin-bottom:20px;
+    
+}
+
+.product > img{
+    width: 100%;
+}

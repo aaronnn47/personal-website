@@ -1,0 +1,39 @@
+.account-detail{
+    width: 100vw;
+    height: 460px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 50px 0;
+}
+
+.account-user{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+.account-user > p{
+    margin: 5px 0;
+}
+
+.account-user > img{
+    border: 0px solid black;
+    width: 80%;
+    margin: 10px 0;
+}
+
+.logout-button{
+    margin: 20px 0;
+    background: #879c9c	;
+    border: 1px solid black;
+    height: 10%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    border-radius: 5%;
+    align-items: center;
+}
