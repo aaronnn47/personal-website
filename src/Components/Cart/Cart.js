@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import "./Cart.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import home from "./home.svg";
-import cart from "./shopping-cart.svg";
-import avatar from "./avatar.svg";
-import banknote from "./banknote.svg";
-import ScrollArea from 'react-scrollbar'
 import x from './error.svg'
 import up from './add.svg'
 import down from './remove.svg'
@@ -56,12 +51,6 @@ class Cart extends Component {
     .then(resp=>{
       this.getCart()
     })
-  }
-
-  showMenu() {
-    this.setState({
-      menuShow: !this.state.menuShow
-    });
   }
 
   deleteCartItem(id){
@@ -118,40 +107,7 @@ class Cart extends Component {
     });
 
     return (
-      <div className="background">
-        <nav>
-          <div>Cart</div>
-          <div className="hamburger" onClick={() => this.showMenu()}>
-            <div />
-            <div />
-            <div />
-          </div>
-        </nav>
-
-        <div
-          className={(this.state.menuShow ? "dropDownShow" : "") + " dropdown"}
-        >
-          <ul>
-            <Link to="/mens">
-              <li>Mens</li>
-            </Link>
-
-            <Link to="/womens">
-              <li>Womens</li>
-            </Link>
-
-            <Link to="/kids">
-              <li>Kids</li>
-            </Link>
-
-            <Link to="/accessories">
-              <li>Accessories</li>
-            </Link>
-            <Link to="/hats">
-              <li>Hats</li>
-            </Link>
-          </ul>
-        </div>
+      <div className='cart'>
 
         <div className='cart-container'>
           {mappedcart}
@@ -173,23 +129,6 @@ class Cart extends Component {
             
         </div>
 
-        <div className="footer">
-          <Link to="/home" className='link'>
-            <img src={home} alt="" />
-          </Link>
-
-          <Link to="/wallet" className='link'>
-            <img src={banknote} alt="" />
-          </Link>
-
-          <Link to="/cart" className='link'>
-            <img src={cart} alt="" />
-          </Link>
-
-          <Link to="/account" className='link'>
-            <img src={avatar} alt="" />
-          </Link>
-        </div>
       </div>
     );
   }

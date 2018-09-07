@@ -1,11 +1,6 @@
 import React,{Component} from 'react'
-import {Link} from 'react-router-dom'
 import './Checkout.css'
 import axios from 'axios'
-import home from "./home.svg";
-import cart from "./shopping-cart.svg";
-import avatar from "./avatar.svg";
-import banknote from "./banknote.svg";
 import edit from './edit.svg'
 import {connect} from 'react-redux'
 import StripeCheckout from 'react-stripe-checkout'
@@ -155,11 +150,6 @@ class Checkout extends Component{
       })
     }
 
-    showMenu() {
-        this.setState({
-          menuShow: !this.state.menuShow
-        });
-      }
 
     handleFirstName(e,id,text){
       if(e.key ==='Enter'){
@@ -241,10 +231,6 @@ class Checkout extends Component{
 
 
     render(){
-    let cart_id = this.state.cart.map(ele=>{
-      return ele.user_name
-    })
-
 
     let shippingInfo = this.state.shipping.map((ele,i)=>{
       return(
@@ -344,41 +330,7 @@ class Checkout extends Component{
     })
     
     return(
-    <div className="background">
-        <nav>
-          <div>Checkout</div>
-          <div className="hamburger" onClick={() => this.showMenu()}>
-            <div />
-            <div />
-            <div />
-          </div>
-        </nav>
-
-        <div
-        className={(this.state.menuShow ? "dropDownShow" : "") + " dropdown"}
-        >
-          <ul>
-            <Link to="/mens">
-              <li>Mens</li>
-            </Link>
-
-            <Link to="/womens">
-              <li>Womens</li>
-            </Link>
-
-            <Link to="/kids">
-              <li>Kids</li>
-            </Link>
-
-            <Link to="/accessories">
-              <li>Accessories</li>
-            </Link>
-            <Link to="/hats">
-              <li>Hats</li>
-            </Link>
-          </ul>
-        </div>
-
+    <div className='checkout'>
         <div className="checkout-container">
           {shippingInfo}
         </div>
@@ -402,26 +354,6 @@ class Checkout extends Component{
             />
 
           </div>
-        
-
-
-        <div className="footer">
-        <Link to="/home" className='link'>
-        <img src={home} alt="" />
-        </Link>
-
-        <Link to="/wallet" className='link'>
-        <img src={banknote} alt="" />
-        </Link>
-
-        <Link to="/cart" className='link'>
-        <img src={cart} alt="" />
-        </Link>
-
-        <Link to="/account" className='link'>
-        <img src={avatar} alt="" />
-        </Link>
-        </div>
 
     </div>
     )

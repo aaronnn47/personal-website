@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import "./buy.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { updatePrice, clearPrice } from "../../ducks/reducer";
 import { connect } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
-import home from "./home.svg";
-import cart from "./shopping-cart.svg";
-import avatar from "./avatar.svg";
-import banknote from "./banknote.svg";
+
 
 class Buy extends Component {
   constructor() {
@@ -18,11 +14,7 @@ class Buy extends Component {
       menuShow: false
     };
   }
-  showMenu() {
-    this.setState({
-      menuShow: !this.state.menuShow
-    });
-  }
+
 
   updateBuy() {
     axios.post("/api/transactions", {
@@ -47,43 +39,7 @@ class Buy extends Component {
     console.log(this.props.price);
 
     return (
-      <div className="background">
-        <nav>
-          <Link to="/home">
-            <div>Clonebase</div>
-          </Link>
-          <div className="hamburger" onClick={() => this.showMenu()}>
-            <div />
-            <div />
-            <div />
-          </div>
-        </nav>
-
-        <div
-          className={(this.state.menuShow ? "dropDownShow" : "") + " dropdown"}
-        >
-          <ul>
-            <Link to="/mens">
-              <li>Men</li>
-            </Link>
-
-            <Link to="/womens">
-              <li>Women</li>
-            </Link>
-
-            <Link to="/kids">
-              <li>Kids</li>
-            </Link>
-
-            <Link to="/accessories">
-              <li>Accessories</li>
-            </Link>
-
-            <Link to="/hats">
-              <li>Hats</li>
-            </Link>
-          </ul>
-        </div>
+      <div>
 
         <div className="display">${this.props.price}</div>
 
@@ -114,20 +70,7 @@ class Buy extends Component {
             />
           </div>
         </div>
-        <div className="footer">
-          <Link to="/home" className="link">
-            <img src={home} alt="" />
-          </Link>
-          <Link to="/account" className="link">
-            <img src={banknote} alt="" />
-          </Link>
-          <Link to="/cart" className="link">
-            <img src={cart} alt="" />
-          </Link>
-          <Link to="/account" className="link">
-            <img src={avatar} alt="" />
-          </Link>
-        </div>
+
       </div>
     );
   }

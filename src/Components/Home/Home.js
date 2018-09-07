@@ -2,10 +2,6 @@ import React, { Component } from 'react'
 import './Home.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import home from './home.svg'
-import cart from './shopping-cart.svg'
-import avatar from './avatar.svg'
-import banknote from './banknote.svg'
 import { Line } from 'react-chartjs-2'
 
 class Home extends Component {
@@ -14,16 +10,9 @@ class Home extends Component {
 
         this.state = {
             crypto_data: [],
-            menuShow: false,
             historical: [],
             chartData: {}
         }
-    }
-
-    showMenu() {
-        this.setState({
-            menuShow: !this.state.menuShow
-        })
     }
 
     componentDidMount() {
@@ -73,40 +62,7 @@ class Home extends Component {
             ]
         }
         return (
-            <div className="background">
-                <nav>
-                    <div>Clonebase</div>
-                    <div className="hamburger"
-                        onClick={() => this.showMenu()}>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </nav>
-
-                <div className={(this.state.menuShow ? 'dropDownShow' : '') + ' dropdown'}>
-                    <ul>
-                        <Link to='/mens'>
-                            <li>Men</li>
-                        </Link>
-
-                        <Link to='/womens'>
-                            <li>Women</li>
-                        </Link>
-
-                        <Link to='/kids'>
-                            <li>Kids</li>
-                        </Link>
-
-                        <Link to='/accessories'>
-                            <li>Accessories</li>
-                        </Link>
-
-                        <Link to='/hats'>
-                            <li>Hats</li>
-                        </Link>
-                    </ul>
-                </div>
+            <div>
 
                 <div className="home-body">
                     <h1>Bitcoin</h1>
@@ -129,24 +85,6 @@ class Home extends Component {
                     </Link>
                 </div>
 
-                <div className="footer">
-                    <Link to='/home' className='link'>
-                        <img src={home} alt="" />
-                    </Link>
-
-                    <Link to='/wallet' className='link'>
-                        <img src={banknote} alt="" />
-                    </Link>
-
-                    <Link to='/cart' className='link'>
-                        <img src={cart} alt="" />
-                    </Link>
-
-                    <Link to='/account' className='link'>
-                        <img src={avatar} alt="" />
-                    </Link>
-
-                </div>
             </div>
         )
     }

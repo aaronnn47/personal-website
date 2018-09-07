@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import "./Wallet.css";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import avatar from "./avatar.svg";
-import banknote from "./banknote.svg";
-import home from "./home.svg";
-import cart from "./shopping-cart.svg";
 import qr from "./qr_code.png";
 
 class Account extends Component {
@@ -13,7 +8,6 @@ class Account extends Component {
     super();
 
     this.state = {
-      menuShow: false,
       publicKey: false,
       address: false,
       bitcoinTransaction: null,
@@ -71,12 +65,6 @@ class Account extends Component {
     });
   }
 
-  showMenu() {
-    this.setState({
-        menuShow: !this.state.menuShow
-    })
-    }
-
   render() {
     let bitcoin = Math.round((this.state.bitcoin * 100) / 100);
     let transaction = this.state.bitcoinTransaction;
@@ -89,49 +77,13 @@ class Account extends Component {
       return (
         <div key={i} className="crypto">
           <div>{ele.name}</div>
-          {/* <div className="ele-symbol">{ele.symbol}</div> */}
           <div>{parseFloat(ele.quotes.USD.price).toFixed(2)}</div>
         </div>
       );
     });
 
     return (
-      <div className="background">
-        <nav>
-          <div>Wallet</div>
-          <div className="hamburger" onClick={() => this.showMenu()}>
-            <div />
-            <div />
-            <div />
-          </div>
-        </nav>
-
-        <div
-          className={(this.state.menuShow ? "dropDownShow" : "") + " dropdown"}
-        >
-          <ul>
-            <Link to="/mens">
-              <li>Men</li>
-            </Link>
-
-            <Link to="/womens">
-              <li>Women</li>
-            </Link>
-
-            <Link to="/kids">
-              <li>Kids</li>
-            </Link>
-
-            <Link to="/accessories">
-              <li>Accessories</li>
-            </Link>
-
-            <Link to="/hats">
-              <li>Hats</li>
-            </Link>
-          </ul>
-        </div>
-
+      <div>
         <div className="wallet-body" onClick={() => this.setToFalse()}>
           <h1>Bitcoin</h1>
           <h3>${transaction}</h3>
@@ -162,21 +114,6 @@ class Account extends Component {
           <button onClick={() => this.showSendAddress()}>Send</button>
 
           <button onClick={() => this.showPublicKey()}>Receive</button>
-        </div>
-
-        <div className="footer" onClick={this.alwaysMount}>
-          <Link to="/home" className="link">
-            <img src={home} alt="" />
-          </Link>
-          <Link to="/account" className="link">
-            <img src={banknote} alt="" />
-          </Link>
-          <Link to="/cart" className="link">
-            <img src={cart} alt="" />
-          </Link>
-          <Link to="/account" className="link">
-            <img src={avatar} alt="" />
-          </Link>
         </div>
       </div>
     );

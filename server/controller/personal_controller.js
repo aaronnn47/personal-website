@@ -25,7 +25,6 @@ module.exports={
     },
     getTransaction: (req,res)=>{
         let db=req.app.get('db')
-
         db.get_transaction()
         .then(resp=>{
             res.status(200).send(resp)
@@ -84,8 +83,8 @@ module.exports={
     },
     getcart: (req,res)=>{
         let db = req.app.get('db')
-
-        db.get_cart()
+        let {id} = req.session.user
+        db.get_cart([id])
         .then(resp=>{
             res.status(200).send(resp)
         })
