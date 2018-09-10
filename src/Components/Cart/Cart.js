@@ -7,6 +7,8 @@ import up from './add.svg'
 import down from './remove.svg'
 import {connect} from 'react-redux'
 import {updateTotal} from '../../ducks/reducer'
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 class Cart extends Component {
   constructor() {
@@ -108,7 +110,7 @@ class Cart extends Component {
 
     return (
       <div className='cart'>
-
+        <Header/>
         <div className='cart-container'>
           {mappedcart}
         </div>
@@ -128,7 +130,7 @@ class Cart extends Component {
             </Link>
             
         </div>
-
+        <Footer/>
       </div>
     );
   }

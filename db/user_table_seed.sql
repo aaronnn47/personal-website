@@ -91,3 +91,15 @@ cart_id serial primary key,
 user_id integer, foreign key(user_id) references users(id),
 product_id integer, foreign key(product_id) references products(id)
 )
+
+create table orders
+(
+    order_id serial primary key,
+    customer_id integer, foreign key (customer_id) references users(id),
+    invoice_date text,
+    billing_address text,
+    billing_city text,
+    billing_state text,
+    billing_zip
+    total integer
+)

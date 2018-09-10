@@ -1,0 +1,21 @@
+.admin-login-page{
+    height: 100vh;
+    width: 100%;
+
+    display:grid;
+    grid-template-columns: 1fr 40% 1fr;
+    grid-template-rows: 1fr 40% 1fr;
+}
+
+.admin-login-main-content{
+    height: 100%;
+    width:100%;
+    grid-area: 2/2;
+    background: green;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: auto auto;
+    
+}

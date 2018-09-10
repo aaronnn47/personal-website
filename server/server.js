@@ -79,6 +79,27 @@ function envCheck(req,res,next){
     }
 }
 
+function adminCheck(req,res,next){
+    if( NODE_ENV === 'dev'){
+        req.app.get('db').get_admin_by_id()
+        .then(resp=>{
+            req.session.admin = resp[0]
+            next()
+        })
+    }else{
+        next()
+    }
+}
+
+app.get('/api/admin-data', adminCheck,(req,res)=>{
+    if(req.session.admin){
+        res.status(200).send(req.session.admin)
+    }else{
+        res.status(401).send('you are not authorized')
+    }
+    console.log(req.session)
+})
+
 app.get('/api/user-data', envCheck, (req,res)=>{
     if(req.session.user){
         res.status(200).send(req.session.user)
@@ -91,6 +112,7 @@ app.get('/auth/logout', (req,res)=>{
     req.session.destroy()
     res.redirect('http://localhost:3000/')
 })
+
 
 app.post('/api/transactions', pc.addTransaction)
 app.post('/api/sellTransactions',pc.sellTransaction)
@@ -115,6 +137,9 @@ app.put('/api/editCityInfo/:id',pc.editCityInfo)
 app.put('/api/editStInfo/:id',pc.editStInfo)
 app.put('/api/editZipInfo/:id',pc.editZipInfo)
 app.delete('/api/deleteEverythingFromCart/',pc.deleteEverything)
+app.post('/api/addToOrder',pc.addToOrder)
+app.get('/api/getOrders',pc.getOrders)
+app.post('/api/adminLogin',pc.adminLogin)
 
 app.listen(NODE_PORT, () => {
     console.log(`listening on port ${NODE_PORT}`)

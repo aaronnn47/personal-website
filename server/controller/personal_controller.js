@@ -223,5 +223,37 @@ module.exports={
         .then(resp=>{
             res.status(200).send('deleted')
         })
+    },
+    addToOrder: (req,res)=>{
+        let db = req.app.get('db')
+        let {date, address, city, st, zip, total} = req.body
+        let{id} = req.session.user
+
+        db.add_to_order([id, date, address, city,st,zip,total])
+        .then(resp=>{
+            res.status(200).send('added to order')
+        })
+    },
+    getOrders: (req,res)=>{
+        let db = req.app.get('db')
+
+        db.get_orders()
+        .then(resp=>[
+            res.status(200).send(resp)
+        ])
+    },
+    adminLogin: async (req,res)=>{
+        let db = req.app.get('db')
+        let {username, password} = req.body
+        console.log(req.body)        
+
+        let foundAdmin = await db.find_admin([username, password])
+        if(foundAdmin[0]){
+            req.session.admin = foundAdmin[0]
+            res.send(foundAdmin[0])
+        }
+        else{
+            res.send('you are not authorized')
+        }
     }
 }

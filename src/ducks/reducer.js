@@ -2,13 +2,22 @@ const initialState={
     price: '',
     user: {},
     clearPrice: '',
-    total: 0
+    total: 0,
+    admin: {}
 }
 
 const UPDATE_PRICE = 'UPDATE_PRICE'
 const UPDATE_USER = 'UPDATE_USER'
 const CLEAR_PRICE = 'CLEAR_PRICE'
 const UPDATE_TOTAL = 'UPDATE_TOTAL'
+const UPDATE_ADMIN = 'UPDATE_ADMIN'
+
+export function updateAdmin(obj){
+    return{
+        type: UPDATE_ADMIN,
+        payload: obj
+    }
+}
 
 export function updatePrice(price){
     return{
@@ -49,6 +58,8 @@ export default function reducer(state=initialState, action){
         return Object.assign({},state,{}, {price: action.payload})
         case UPDATE_TOTAL:
         return Object.assign({},state,{total: action.payload})
+        case UPDATE_ADMIN:
+        return Object.assign({},state,{admin: action.payload})
         default: return state
     }
 

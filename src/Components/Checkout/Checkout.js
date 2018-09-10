@@ -4,6 +4,8 @@ import axios from 'axios'
 import edit from './edit.svg'
 import {connect} from 'react-redux'
 import StripeCheckout from 'react-stripe-checkout'
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 
 class Checkout extends Component{
@@ -25,14 +27,17 @@ class Checkout extends Component{
           cityIcon: 'block',
           stIcon: 'block',
           zipIcon: 'block',
-          showButton: 'hidden',
           firstNameEdit: '',
           lastNameEdit: '',
           addressEdit: '',
           cityEdit: '',
           stEdit: '',
           zipEdit: '',
-          cart: []
+          cart: [],
+          address: '',
+          city: '',
+          st: '',
+          zip:''
         }
     }
 
@@ -60,42 +65,36 @@ class Checkout extends Component{
       this.setState({
         hideFirstNameInput: 'text',
         firstNameIcon: 'none',
-        showButton: 'visible'
       })
     }
     showLastInput(){
       this.setState({
         hideLastNameInput: 'text',
         lastNameIcon: 'none',
-        showButton: 'visible'
       })
     }
     showAddressInput(){
       this.setState({
         hideAddressInput: 'text',
         addressIcon: 'none',
-        showButton: 'visible'
       })
     }
     showCityInput(){
       this.setState({
         hideCityInput: 'text',
         cityIcon: 'none',
-        showButton: 'visible'
       })
     }
     showStInput(){
       this.setState({
         hideStInput: 'text',
         stIcon: 'none',
-        showButton: 'visible'
       })
     }
     showZipInput(){
       this.setState({
         hideZipInput: 'text',
         zipIcon: 'none',
-        showButton: 'visible'
       })
     }
 
@@ -121,7 +120,13 @@ class Checkout extends Component{
       axios.get('/api/getShipping')
       .then(resp=>{
         if(resp.data[0]){
-          this.setState({shipping:resp.data})
+          this.setState({
+            shipping:resp.data,
+            address: resp.data[0].address,
+            city: resp.data[0].city,
+            st: resp.data[0].st,
+            zip: resp.data[0].zip
+          })
         }else{
           this.props.history.push('/shipping')
         }
@@ -142,8 +147,8 @@ class Checkout extends Component{
       })
     }
 
-    sellBitcoin(obj){
-      axios.post('/api/sellTransactions',obj)
+    sellBitcoin(){
+      axios.post('/api/sellTransactions',{price: this.props.total})
       .then(resp=>{
         this.deleteEverythingFromCart()
         this.props.history.push('/confirmation')
@@ -229,8 +234,19 @@ class Checkout extends Component{
       axios.delete(`/api/deleteEverythingFromCart/`)
     }
 
+    addOrder(obj){
+      axios.post('/api/addToOrder', obj)
+      .then(resp=>{
+        this.sellBitcoin()
+      })
+    }
+
 
     render(){
+    console.log(this.props.total)
+
+    const timestamp = Date.now()
+    let newTimestamp = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(timestamp)
 
     let shippingInfo = this.state.shipping.map((ele,i)=>{
       return(
@@ -331,6 +347,7 @@ class Checkout extends Component{
     
     return(
     <div className='checkout'>
+        <Header/>
         <div className="checkout-container">
           {shippingInfo}
         </div>
@@ -342,7 +359,17 @@ class Checkout extends Component{
 
           <div className='checkout-buttons-div'>
           <button className='checkout-bitcoin' 
-          onClick={()=>this.sellBitcoin({price:this.props.total})}
+          onClick={
+          // ()=>this.sellBitcoin({price:this.props.total})
+          ()=>this.addOrder({
+            date: newTimestamp,
+            address: this.state.address,
+            city: this.state.city,
+            st: this.state.st,
+            zip: this.state.zip,
+            total: this.props.total
+          })
+        }
           >Pay With Bitcoin</button>
           <StripeCheckout
               name="Clonebase"
@@ -354,7 +381,7 @@ class Checkout extends Component{
             />
 
           </div>
-
+          <Footer/>
     </div>
     )
     }

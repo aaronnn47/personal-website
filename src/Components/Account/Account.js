@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {updateUser} from '../../ducks/reducer'
 import {connect} from 'react-redux'
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 import './Account.css'
 
 class Account extends Component{
@@ -9,16 +11,10 @@ class Account extends Component{
         super(props)
 
         this.state={
-            user:{},
-            menuShow: false,
+            user:{}
         }
     }
 
-    showMenu(){
-        this.setState({
-            menuShow: !this.state.menuShow
-        })
-    }
 
     async componentDidMount(){
         let res = await axios.get('/api/user-data')
@@ -30,7 +26,7 @@ class Account extends Component{
         return(
             <div>
 
-                
+            <Header/> 
             <div className="account-detail">
             {
                 user.user_name ? (
@@ -46,8 +42,8 @@ class Account extends Component{
             className="logout-button">
             Logout
             </a>
-
             </div>
+            <Footer/>
 
         </div>  
         )

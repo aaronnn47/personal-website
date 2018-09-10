@@ -1,5 +1,7 @@
 import React,{Component} from 'react'
 import axios from 'axios'
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 
 class Mens extends Component{
@@ -44,9 +46,11 @@ class Mens extends Component{
         })
         return(
             <div>
+                <Header/>
                     <div className='shirts'>
                     {hat}
                     </div>
+                <Footer/>
             </div>
         )
     }

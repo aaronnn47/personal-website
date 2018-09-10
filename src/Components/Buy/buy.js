@@ -4,6 +4,8 @@ import axios from "axios";
 import { updatePrice, clearPrice } from "../../ducks/reducer";
 import { connect } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 
 class Buy extends Component {
@@ -40,7 +42,7 @@ class Buy extends Component {
 
     return (
       <div>
-
+        <Header/>
         <div className="display">${this.props.price}</div>
 
         <div className="button-class">
@@ -70,7 +72,7 @@ class Buy extends Component {
             />
           </div>
         </div>
-
+        <Footer/>
       </div>
     );
   }

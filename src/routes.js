@@ -16,6 +16,7 @@ import Shipping from '../src/Components/Shipping/Shipping'
 import Checkout from '../src/Components/Checkout/Checkout'
 import Confirmation from '../src/Components/Confirmation/Confirmation'
 import Admin from '../src/Admin/Dashboard/Dashboard'
+import AdminLogin from '../src/Admin/Login/Login'
 
 
 export default (
@@ -35,7 +36,8 @@ export default (
 <Route path='/checkout' component={Checkout}/>
 <Route path='/confirmation' component={Confirmation}/>
 <Route path='/hats' component={Hats}/>
-<Route path='/admin' component={Admin}/>
+<Route exact path='/admin' component={AdminLogin}/>
+<Route path='/admin/home' component={Admin}/>
 </Switch>
 
 );

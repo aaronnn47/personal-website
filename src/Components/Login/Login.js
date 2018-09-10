@@ -1,6 +1,8 @@
 import React,{Component} from 'react'
 import logo from './cityscape.svg'
 import './Login.css'
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 class Login extends Component{
 
@@ -14,11 +16,12 @@ class Login extends Component{
     render(){
         return(
             <div className="login-page">
+                <Header/>
                 <div className="login">
                     <img src={logo} alt="" />   
                     <button onClick={this.login}>Login</button>
                 </div>
-            
+                <Footer/>
             </div>
         )
     }

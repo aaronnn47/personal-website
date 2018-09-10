@@ -4,6 +4,8 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { updatePrice, clearPrice } from "../../ducks/reducer";
 import { connect } from "react-redux";
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 class Sell extends Component {
   constructor() {
@@ -33,7 +35,7 @@ class Sell extends Component {
     console.log(this.props.price);
     return (
       <div>
-
+        <Header/>
         <div className="display">${this.props.price}</div>
 
         <div className="button-class">
@@ -56,6 +58,7 @@ class Sell extends Component {
             <button onClick={() => this.updateBuy()}>Confirm</button>
           </Link>
         </div>
+        <Footer/>
       </div>
     );
   }

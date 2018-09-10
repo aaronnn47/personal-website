@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './Accessories.css'
 import axios from 'axios'
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 class Accessories extends Component {
     constructor() {
@@ -37,9 +39,9 @@ class Accessories extends Component {
         return (
             <div>
                 
-                
+                <Header/>
                 {accessories}
-                
+                <Footer/>
 
             </div>
         )

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./Wallet.css";
 import axios from "axios";
 import qr from "./qr_code.png";
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 class Account extends Component {
   constructor() {
@@ -84,6 +86,7 @@ class Account extends Component {
 
     return (
       <div>
+        <Header/>
         <div className="wallet-body" onClick={() => this.setToFalse()}>
           <h1>Bitcoin</h1>
           <h3>${transaction}</h3>
@@ -115,6 +118,7 @@ class Account extends Component {
 
           <button onClick={() => this.showPublicKey()}>Receive</button>
         </div>
+        <Footer/>
       </div>
     );
   }

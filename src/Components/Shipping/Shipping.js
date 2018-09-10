@@ -2,6 +2,8 @@ import React,{Component} from 'react'
 import {Link} from 'react-router-dom'
 import './Shipping.css'
 import axios from 'axios'
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 
 class Shipping extends Component{
@@ -40,6 +42,7 @@ class Shipping extends Component{
     render(){
     return(
     <div >
+        <Header/>
         <div className="shipping-container">
             <h1>Shipping Details</h1>
 
@@ -101,7 +104,7 @@ class Shipping extends Component{
             
             </Link>
         </div>
-    
+        <Footer/>
     </div>
     )
     }

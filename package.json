@@ -14,11 +14,13 @@
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.4.2",
     "react-modal": "^3.5.1",
+    "react-password-mask": "^3.3.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.5",
     "react-scrollbar": "^0.5.4",
     "react-stripe-checkout": "^2.6.3",
+    "react-timestamp": "^4.4.0",
     "redux": "^4.0.0",
     "stripe": "^6.8.0"
   },
@@ -35,6 +37,9 @@
     },
     "/auth": {
       "target": "http://localhost:3005"
+    },
+    "/admin": {
+      "target": "http://localhost:3010"
     }
   }
 }

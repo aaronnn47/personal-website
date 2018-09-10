@@ -3,6 +3,8 @@ import './Home.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { Line } from 'react-chartjs-2'
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 class Home extends Component {
     constructor() {
@@ -63,7 +65,7 @@ class Home extends Component {
         }
         return (
             <div>
-
+                <Header/>
                 <div className="home-body">
                     <h1>Bitcoin</h1>
                     {Math.round(this.state.crypto_data * 100) / 100}
@@ -84,7 +86,7 @@ class Home extends Component {
                         <div>Sell</div>
                     </Link>
                 </div>
-
+                <Footer/>
             </div>
         )
     }

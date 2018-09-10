@@ -2,6 +2,8 @@ import React,{Component} from 'react'
 import './Mens.css'
 import axios from 'axios'
 import Modal from 'react-modal'
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 const customStyles = {
     content: {
@@ -89,9 +91,9 @@ class Mens extends Component{
         return(
             <div>
 
-                
+                <Header/>
                 {shirts}
-                
+                <Footer/>
 
 
             </div>

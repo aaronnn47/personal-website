@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './Womens.css'
 import axios from 'axios'
+import Header from '../../Views/Header/Header'
+import Footer from '../../Views/Footer/Footer'
 
 class Womens extends Component {
     constructor() {
@@ -41,10 +43,10 @@ class Womens extends Component {
         })
         return (
             <div>
-
+                <Header/>
                 
                     {shirts}
-                
+                <Footer/>
             </div>
         )
     }
