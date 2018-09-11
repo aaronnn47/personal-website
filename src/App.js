@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <HashRouter>
-        <div className='background'>
+        <div >
         {routes}
         </div>
       </HashRouter>

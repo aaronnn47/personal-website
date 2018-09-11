@@ -1,24 +1,24 @@
 .admin-page{
     width:100%;
-    height:100vh;
+    height:80vh;
     display:grid;
     grid-column-gap: 10px;
     grid-row-gap: 20px;
     grid-template-columns: 10% 60% 1fr;
     grid-template-rows: 15% 50% 1fr;
-    grid-template-areas: 
-    'header header header'
-    'main main main'
-    'footer footer footer'
 }
 .main-nav{
-    grid-area: 1/2/1/4;
+    grid-area: 1/2;
     background: navy;
 }
 
 .admin-side-nav{
     background: teal;
-    grid-area: 2/1/4/1;
+    grid-area: 2/1;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .side-nav-display{
@@ -30,11 +30,33 @@
 .todo-body{
     background: orange;
     grid-area: 2/3;
+
     display:grid;
     grid-template-rows: 1fr 200px 1fr;
 
 }
 
+.admin-right-nav{
+    grid-area: 1/3;
+    /* background: pink; */
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 5px;
+}
+
+.profit{
+    grid-area: 1/2;
+    background: bisque;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.total-order{
+    grid-area: 1/1;
+    background: beige;
+}
 
 .admin-graph{
     background: lavender;
@@ -47,8 +69,9 @@
 }
 
 .admin-order-history{
+    position: relative;
     background: purple;
-    grid-area: 3/2/4/4;
+    grid-area: 3/2;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,17 +93,51 @@
 }
 
 .admin-order{
-    width: 60%;
+    width: 90%;
     height: 5%;
     margin-top: 20px;
     display:flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
-@media(max-width: 600px){
-    grid-area:
-    'header header header'
-    '. main main'
-    'footer footer footer'
+.please-login{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 40% 1fr 40%;
+    grid-template-rows: 40% 1fr 40%;
+}
+
+.please-login-content{
+    grid-area: 2/2
+}
+
+
+@media(max-width: 415px){
+    .admin-page{
+        width: 100%;
+        height: 300vh;
+        display: grid;
+        grid-template-rows: 5% 1fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr;
+    }
+    .main-nav{
+        grid-area: 1/1
+    }
+    .admin-side-nav{
+        grid-area:5/1;
+    }
+    .admin-graph{
+        grid-area: 2/1
+    }
+    .todo-body{
+        grid-area: 3/1
+    }
+    .admin-order-history{
+        grid-area: 4/1
+    }
+    .admin-right-nav{
+        grid-area: 6/1
+    }
 }
 

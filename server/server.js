@@ -4,7 +4,8 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     session = require('express-session'),
     axios = require('axios')
-    pc = require('./controller/personal_controller')
+    pc = require('./controller/personal_controller'),
+    nodemailer = require('nodemailer')
 
 const app = express()
 app.use(bodyParser.json())
@@ -17,7 +18,9 @@ const {
     CLIENT_SECRET,
     CONNECTION_STRING,
     NODE_ENV,
-    STRIPE_SECRET
+    STRIPE_SECRET,
+    USER,
+    PASSWORD
 } = process.env
 
 massive(CONNECTION_STRING).then(db => {
@@ -29,6 +32,12 @@ app.use(session({
     resave: false,
     saveUninitialized: true
 }))
+
+app.use((request, response, next) => {
+    response.header("Access-Control-Allow-Origin", "*");
+    response.header("Access-Control-Allow-Headers", "Content-Type");
+    next();
+  });
 
 app.get('/auth/callback', async (req,res)=>{
     const payload = {
@@ -111,6 +120,36 @@ app.get('/api/user-data', envCheck, (req,res)=>{
 app.get('/auth/logout', (req,res)=>{
     req.session.destroy()
     res.redirect('http://localhost:3000/')
+})
+
+app.post('/api/send', (req,res)=>{
+    let transporter = nodemailer.createTransport({
+        host:'smtp.gmail.com',
+        port:587,
+        auth:{
+            user: 'practicedevmountain@gmail.com',
+            pass: 'practice1234'
+        },
+        tls:{
+            rejectUnauthorized: false
+        }
+    })
+    let{text} = req.body
+    
+    let mailOptions= {
+        from: `'Aaron' <practicedevmountain@gmail.com>`,
+        to: 'practicedevmountain@gmail.com',
+        subject: 'New Order',
+        text: text
+    }
+
+    transporter.sendMail(mailOptions, (error,info)=>{
+        if(error){
+            return console.log(error)
+        }
+
+        res.render('contact', {msg: 'email has been sent'})
+    })
 })
 
 

@@ -115,7 +115,6 @@ class Cart extends Component {
           {mappedcart}
         </div>
 
-
         <div className='total'>
           <p>Total:</p>
           {total}

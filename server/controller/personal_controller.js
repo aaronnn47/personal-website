@@ -246,7 +246,7 @@ module.exports={
         let db = req.app.get('db')
         let {username, password} = req.body
         console.log(req.body)        
-
+        
         let foundAdmin = await db.find_admin([username, password])
         if(foundAdmin[0]){
             req.session.admin = foundAdmin[0]

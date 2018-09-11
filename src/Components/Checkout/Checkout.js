@@ -33,11 +33,12 @@ class Checkout extends Component{
           cityEdit: '',
           stEdit: '',
           zipEdit: '',
-          cart: [],
+          cart: {},
           address: '',
           city: '',
           st: '',
-          zip:''
+          zip:'',
+          timestamp: '',
         }
     }
 
@@ -112,7 +113,9 @@ class Checkout extends Component{
     getCart(){
       axios.get('/api/getcart')
       .then(resp=>{
-        this.setState({cart: resp.data})
+        this.setState({
+          cart: resp.data
+        })
       })
     }
 
@@ -152,6 +155,7 @@ class Checkout extends Component{
       .then(resp=>{
         this.deleteEverythingFromCart()
         this.props.history.push('/confirmation')
+        this.sendEmail()
       })
     }
 
@@ -234,19 +238,31 @@ class Checkout extends Component{
       axios.delete(`/api/deleteEverythingFromCart/`)
     }
 
-    addOrder(obj){
-      axios.post('/api/addToOrder', obj)
-      .then(resp=>{
+    addOrder(){
+      axios.post('/api/addToOrder', {
+        date: this.state.timestamp,
+        address: this.state.address,
+        city: this.state.city,
+        st: this.state.st,
+        zip: this.state.zip,
+        total: this.props.total
+      }).then(resp=>{
         this.sellBitcoin()
+
+      })
+    }
+
+    sendEmail(){
+      axios.post('/api/send',{
+        text: 'hello there buddy'
       })
     }
 
 
     render(){
-    console.log(this.props.total)
-
     const timestamp = Date.now()
-    let newTimestamp = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(timestamp)
+    this.state.timestamp = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(timestamp)
+
 
     let shippingInfo = this.state.shipping.map((ele,i)=>{
       return(
@@ -361,14 +377,7 @@ class Checkout extends Component{
           <button className='checkout-bitcoin' 
           onClick={
           // ()=>this.sellBitcoin({price:this.props.total})
-          ()=>this.addOrder({
-            date: newTimestamp,
-            address: this.state.address,
-            city: this.state.city,
-            st: this.state.st,
-            zip: this.state.zip,
-            total: this.props.total
-          })
+          ()=>this.addOrder()
         }
           >Pay With Bitcoin</button>
           <StripeCheckout

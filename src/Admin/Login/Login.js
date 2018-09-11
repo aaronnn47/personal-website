@@ -50,6 +50,7 @@ class Login extends Component{
                     value={this.state.password}
                     onChange={(e)=>this.handleChange(e)}
                     useVendorStyles={false}
+                    buttonStyle={'none'}
                     />
                     <button
                     onClick={()=>this.login(
