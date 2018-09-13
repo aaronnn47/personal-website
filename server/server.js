@@ -14,10 +14,11 @@ const express = require('express'),
 
 const app = express()
 app.use(bodyParser.json())
-app.use(express.static(`${__dirname}/../build`))
-// app.get('*', (req,res)=>{
-//     res.sendFile(path.join(__dirname, '../build/index.html'))
-// })
+// app.use(express.static(`${__dirname}/../build`))
+
+app.get('*', (req,res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'))
+})
 
 
 
@@ -143,11 +144,11 @@ app.get('/auth/callback', async (req,res)=>{
     let foundUser = await db.find_user([sub])
     if (foundUser[0]){
         req.session.user = foundUser[0]
-        res.redirect('/#/home')
+        res.redirect('/home')
     }else{
         let createdUser = await db.create_user([name,email,picture,sub])
         req.session.user = createdUser[0]
-        res.redirect('/#/home')
+        res.redirect('/home')
     }
 
 })
