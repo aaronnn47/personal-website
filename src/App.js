@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {HashRouter} from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom'
 import routes from '../src/routes';
 import axios from 'axios'
 
@@ -11,11 +11,11 @@ class App extends Component {
   }
   render() {
     return (
-      <HashRouter>
+      <BrowserRouter>
         <div >
         {routes}
         </div>
-      </HashRouter>
+      </BrowserRouter>
     );
   }
 }
