@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import "./Dashboard.css";
+import {Link} from 'react-router-dom'
 import { Bar } from "react-chartjs-2";
 import Timestamp from "react-timestamp";
 import axios from "axios";
 import home from "../../Images/home.svg";
 import avatar from '../../Images/avatar.svg'
-import cart from '../../Images/cart.svg'
-import wallet from '../../Images/banknote.svg'
+import calendar from '../../Images/calendar.svg'
+import email from '../../Images/arroba.svg'
+import Calendars from 'react-calendar'
+import Todo from './Todo'
+import TodoSubmit from './TodoSubmit'
 
 import { connect } from "react-redux";
 import { updateAdmin } from "../../ducks/reducer";
@@ -18,7 +22,10 @@ class Dashboard extends Component {
     this.state = {
       orders: [],
       reducedData:[],
-      newOrders: []
+      newOrders: [],
+      date: new Date(),
+      monthTotal: null,
+      todo:[]
     };
   }
 
@@ -26,21 +33,58 @@ class Dashboard extends Component {
     this.getMappedData()
     this.getOrders();
     this.mountAdminCred();
+    this.getTodo()
   }
 
+  getTodo(){
+    axios.get('/api/getTodo')
+    .then(resp=>{
+        this.setState({
+            todo: resp.data
+        })
+    })
+}
+  
   componentDidUpdate(previousProps, previousState){
     if(previousState.orders !== this.state.orders){
-        this.makeChartData([...this.state.orders])
+      this.makeChartData([...this.state.orders])
     }
+    
+  }
+
+  getMonthTotal(obj){
+    let month = obj.map(ele=>{
+      return ele.invoice_date.split('/')[0]
+    })
+
+    let year = obj.map(ele=>{
+      return ele.invoice_date.split('/')[2]
+    }).sort((a,b)=>{
+      return b - a
+    })
+   
+    let monthTotal = obj.reduce((acc,cur)=>{
+      if(month[month.length - 1] === cur.invoice_date.split('/')[0] && year[0] === cur.invoice_date.split('/')[2]){
+      return acc + cur.total
+      }else{
+        return acc
+      }
+    },0)
+
+    this.setState({
+      monthTotal: monthTotal
+    })
   }
 
   getOrders() {
     axios.get('/api/getOrders').then(resp => {
-      this.setState({
-        orders: resp.data
-      });
-      return resp.data
+      this.setState({orders: resp.data})
+      this.getMonthTotal(this.state.newOrders)
     });
+  }
+
+  onChange(date){
+    this.setState({date: date})
   }
 
   makeChartData(data){
@@ -75,11 +119,12 @@ class Dashboard extends Component {
   }
 
   render() {
-
     let totalProfit = this.state.reducedData.reduce((acc, cur)=>{
         return acc + cur.total
-    },1)
+    },0)
     
+    let totalOrders = this.state.newOrders.length
+    // console.log(this.state.newOrders)
     let { admin } = this.props;
 
     let total = []
@@ -98,6 +143,7 @@ class Dashboard extends Component {
         }
       ]
     };
+    
     const timestamp = Date.now();
     let newTimestamp = new Intl.DateTimeFormat("en-US", {
       year: "numeric",
@@ -107,14 +153,16 @@ class Dashboard extends Component {
 
     let orders = this.state.newOrders.map((ele, i) => {
       return (
-        <div key={i} className="admin-order">
-          <div>{ele.order_id}</div>
+        <div key={i} 
+        className="admin-order"
+        >
+          <div >{ele.order_id}.</div>
           <div >{ele.invoice_date}</div>
           <div>{ele.billing_address}</div>
           <div>{ele.billing_city}</div>
-          <div>{ele.billing_st}</div>
+          <div>{ele.billing_state}</div>
           <div>{ele.billing_zip}</div>
-          <div>{ele.total}</div>
+          <div>${ele.total}.00</div>
         </div>
       );
     });
@@ -122,51 +170,86 @@ class Dashboard extends Component {
       <div>
         {admin.admin_id ? (
           <div className="admin-page">
-            <div className="main-nav" />
+            <div className="main-nav">
+            <h1>Welcome Home Admin</h1>
+            </div>
 
-            <div className="side-nav-display" />
-
-            <div className="side-nav-content" />
+            <div className="side-nav-content">
+            </div>
 
             <div className="admin-side-nav">
+
               <img src={home} alt="" />
+              <p>Home</p>
+              <Link to='/admin/admin'>
               <img src={avatar} alt="" />
-              <img src={wallet} alt="" />
-              <img src={cart} alt="" />
+              </Link>
+              <p>Account</p>
+              <Link to='/admin/calendar'>
+              <img src={calendar} alt="" />
+              </Link>
+              <p>Calendar</p>
+
+              <img src={email} alt="" />
+              <p>Email</p>
             </div>
 
             <div className="admin-graph">
               <h2>History</h2>
               <Bar
                 data={data}
-                width={100}
+                width={70}
                 height={35}
-                className="chart-data"
+                // className="chart-data"
               />
               <Timestamp date="2018-09-08 05:21:00" format="full" />
             </div>
 
             <div className="todo-body">
-              <h4>To Do</h4>
+              <div className='todo-header'>
+              <h2>To Do List</h2>
+              </div>
+
+              <div className='todo-content'>
+              <Todo todo={this.state.todo}/>
+              </div>
 
               <div className="todo-submit-field">
-                <input />
-                <button>Submit</button>
+              <TodoSubmit />
               </div>
             </div>
 
             <div className="admin-order-history">
-              <h1>Order History</h1>
+              <h1 className='order-history-header'>Order History</h1>
               {orders}
             </div>
 
             <div className='admin-right-nav'>
-            <h4 className='total-order'>Total Orders</h4>
-            <div className='profit'>
-            <h2>Profit</h2>
-            {totalProfit}
+
+            <div className='total-order'>
+            <h4>Total Orders</h4>
+            {totalOrders}
             </div>
-            <h1>hello</h1>
+
+            <div className='profit'>
+            <h2> Total Profit</h2>
+            ${totalProfit}.00
+            </div>
+
+            <div className='month-profit'>
+            <h4>Month Total</h4>
+            ${this.state.monthTotal}.00
+            </div>
+
+
+            </div>
+
+
+            <div className='calendar-component'>
+            <Calendars
+                value={this.state.date}
+                width={100}
+                />
             </div>
           </div>
         ) : (

@@ -35,6 +35,23 @@ class Login extends Component{
         })
     }
 
+    rot13(str){
+        var newString=[]
+
+        for(var i = 0; i < str.length; i++){
+            if(str.charCodeAt(i) < 65 || str.charCodeAt(i) > 90){
+                newString.push(str.charAt(i))
+            }else if(str.charAt(i) > 77){
+                newString.push(String.fromCharCode(str.charCodeAt(i) - 13))
+
+            }else{
+                newString.push(String.fromCharCode(str.charCodeAt(i) + 13))
+
+            }
+        }
+
+        return newString.join('')
+    }
 
     render(){
         return(
@@ -42,11 +59,13 @@ class Login extends Component{
                 <div className='admin-login-main-content'>
                     <h1>Please Login</h1>
                     <input 
+                    className='login-button'
                     name='username'
                     onChange={(e)=>this.handleChange(e)}
                     />
                     <PasswordMask 
                     name='password'
+                    className='login-button'
                     value={this.state.password}
                     onChange={(e)=>this.handleChange(e)}
                     useVendorStyles={false}

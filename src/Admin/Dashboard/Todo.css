@@ -1,0 +1,30 @@
+.todo-elements{
+    width: 60%;
+    height: 30px;
+    display:flex;
+    margin-left: 70px;
+    justify-content: space-around;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    /* background: yellow; */
+}
+
+.todo-checkbox{
+    width: 15%;
+    height: 55%;
+    border: 1px solid black;
+    border-radius: 80%;
+    overflow: hidden;
+    /* background: purple; */
+    
+    
+}
+
+.todo-fill-show{
+    height:100%;
+    width:100%;
+    background: black;
+    border: 0px;
+    
+}

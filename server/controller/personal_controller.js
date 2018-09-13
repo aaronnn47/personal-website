@@ -236,7 +236,7 @@ module.exports={
     },
     getOrders: (req,res)=>{
         let db = req.app.get('db')
-
+//Eric was here
         db.get_orders()
         .then(resp=>[
             res.status(200).send(resp)
@@ -255,5 +255,23 @@ module.exports={
         else{
             res.send('you are not authorized')
         }
+    },
+    addTodo: (req,res)=>{
+        let db = req.app.get('db')
+        let {todo} = req.body
+
+        console.log(todo)
+        db.add_todo([todo])
+        .then(resp=>{
+            res.status(200).send('added to database')
+        })
+    },
+    getTodo: (req,res)=>{
+        let db = req.app.get('db')
+
+        db.get_todo()
+        .then(resp=>{
+            res.status(200).send(resp)
+        })
     }
 }

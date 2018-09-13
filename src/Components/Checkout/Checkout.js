@@ -254,7 +254,7 @@ class Checkout extends Component{
 
     sendEmail(){
       axios.post('/api/send',{
-        text: 'hello there buddy'
+        text: `New order ${this.state.timestamp} at ${this.state.address} ${this.state.city} ${this.state.st} ${this.state.zip} for the amount of ${this.props.total}`
       })
     }
 
@@ -380,14 +380,14 @@ class Checkout extends Component{
           ()=>this.addOrder()
         }
           >Pay With Bitcoin</button>
-          <StripeCheckout
+          {/* <StripeCheckout
               name="Clonebase"
               description="Thank you for your purchase"
               image="http://via.placeholder.com/100x100"
               token={this.onToken}
               stripeKey={process.env.REACT_APP_STRIPE_KEY}
               amount={this.props.total * 100}
-            />
+            /> */}
 
           </div>
           <Footer/>

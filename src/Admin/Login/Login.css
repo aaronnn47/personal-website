@@ -11,11 +11,15 @@
     height: 100%;
     width:100%;
     grid-area: 2/2;
-    background: green;
+    /* background: green; */
     display:flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     margin: auto auto;
     
+}
+
+.login-button{
+    border: 1px solid black;
 }

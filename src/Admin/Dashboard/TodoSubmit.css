@@ -1,0 +1,11 @@
+.todo-submit{
+    width: 60%;
+    height: 50%;
+    display:flex;
+    justify-content: space-between;
+}
+
+.todo-button{
+    width: 30%;
+    height: 100%;
+}

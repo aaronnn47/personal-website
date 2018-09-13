@@ -5,7 +5,11 @@ const express = require('express'),
     session = require('express-session'),
     axios = require('axios')
     pc = require('./controller/personal_controller'),
-    nodemailer = require('nodemailer')
+    nodemailer = require('nodemailer'),
+    fs = require('fs'),
+    readline = require('readline'),
+    {google} = require('googleapis')
+    // credentials = require('../server/credentials.json')
 
 const app = express()
 app.use(bodyParser.json())
@@ -18,10 +22,75 @@ const {
     CLIENT_SECRET,
     CONNECTION_STRING,
     NODE_ENV,
-    STRIPE_SECRET,
-    USER,
-    PASSWORD
+    USERNAME,
+    PASSWORD,
 } = process.env
+
+// const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
+// const TOKEN_PATH = 'token.json';
+
+// fs.readFile(`credentials.json`, (err, content) => {
+//     if (err) return console.log('Error loading client secret file:', err);
+//     // Authorize a client with credentials, then call the Gmail API.
+//     authorize(JSON.parse(content), listLabels);
+// });
+
+// function authorize(credentials, callback) {
+//     const {client_secret, client_id, redirect_uris} = credentials.installed;
+//     const oAuth2Client = new google.auth.OAuth2(
+//         client_id, client_secret, redirect_uris[0]);
+  
+//     // Check if we have previously stored a token.
+//     fs.readFile(TOKEN_PATH, (err, token) => {
+//       if (err) return getNewToken(oAuth2Client, callback);
+//       oAuth2Client.setCredentials(JSON.parse(token));
+//       callback(oAuth2Client);
+//     });
+// }
+
+// function getNewToken(oAuth2Client, callback) {
+//     const authUrl = oAuth2Client.generateAuthUrl({
+//       access_type: 'offline',
+//       scope: SCOPES,
+//     });
+//     console.log('Authorize this app by visiting this url:', authUrl);
+//     const rl = readline.createInterface({
+//       input: process.stdin,
+//       output: process.stdout,
+// });
+
+// rl.question('Enter the code from that page here: ', (code) => {
+//     rl.close();
+//       oAuth2Client.getToken(code, (err, token) => {
+//         if (err) return console.error('Error retrieving access token', err);
+//         oAuth2Client.setCredentials(token);
+//         // Store the token to disk for later program executions
+//         fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+//           if (err) return console.error(err);
+//           console.log('Token stored to', TOKEN_PATH);
+//         });
+//         callback(oAuth2Client);
+//       });
+//     });
+// }
+
+// function listLabels(auth) {
+//     const gmail = google.gmail({version: 'v1', auth});
+//     gmail.users.labels.list({
+//       userId: 'me',
+//     }, (err, res) => {
+//       if (err) return console.log('The API returned an error: ' + err);
+//       const labels = res.data.labels;
+//       if (labels.length) {
+//         console.log('Labels:');
+//         labels.forEach((label) => {
+//           console.log(`- ${label.name}`);
+//         });
+//       } else {
+//         console.log('No labels found.');
+//       }
+//     });
+// }
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
@@ -119,7 +188,7 @@ app.get('/api/user-data', envCheck, (req,res)=>{
 
 app.get('/auth/logout', (req,res)=>{
     req.session.destroy()
-    res.redirect('http://localhost:3000/')
+    res.redirect(process.env.SUCCESS)
 })
 
 app.post('/api/send', (req,res)=>{
@@ -127,18 +196,18 @@ app.post('/api/send', (req,res)=>{
         host:'smtp.gmail.com',
         port:587,
         auth:{
-            user: 'practicedevmountain@gmail.com',
-            pass: 'practice1234'
+            user: USERNAME,
+            pass: PASSWORD
         },
         tls:{
             rejectUnauthorized: false
         }
     })
-    let{text} = req.body
+    let {text} = req.body
     
     let mailOptions= {
         from: `'Aaron' <practicedevmountain@gmail.com>`,
-        to: 'practicedevmountain@gmail.com',
+        to: USERNAME,
         subject: 'New Order',
         text: text
     }
@@ -179,6 +248,8 @@ app.delete('/api/deleteEverythingFromCart/',pc.deleteEverything)
 app.post('/api/addToOrder',pc.addToOrder)
 app.get('/api/getOrders',pc.getOrders)
 app.post('/api/adminLogin',pc.adminLogin)
+app.post('/api/todo',pc.addTodo)
+app.get('/api/getTodo',pc.getTodo)
 
 app.listen(NODE_PORT, () => {
     console.log(`listening on port ${NODE_PORT}`)

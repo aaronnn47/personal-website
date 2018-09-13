@@ -15,8 +15,11 @@ import Hats from '../src/Components/Hats/Hats'
 import Shipping from '../src/Components/Shipping/Shipping'
 import Checkout from '../src/Components/Checkout/Checkout'
 import Confirmation from '../src/Components/Confirmation/Confirmation'
-import Admin from '../src/Admin/Dashboard/Dashboard'
+import Dashboard from '../src/Admin/Dashboard/Dashboard'
 import AdminLogin from '../src/Admin/Login/Login'
+import Email from '../src/Admin/Email/Email'
+import Calendar from '../src/Admin/Calendar/Calendar'
+import Admin from '../src/Admin/Admin/Admin'
 
 
 export default (
@@ -37,7 +40,10 @@ export default (
 <Route path='/confirmation' component={Confirmation}/>
 <Route path='/hats' component={Hats}/>
 <Route exact path='/admin' component={AdminLogin}/>
-<Route path='/admin/home' component={Admin}/>
+<Route path='/admin/home' component={Dashboard}/>
+<Route path='/admin/email' component={Email}/>
+<Route path='/admin/calendar' component={Calendar}/>
+<Route path='/admin/admin' component={Admin}/>
 </Switch>
 
 );

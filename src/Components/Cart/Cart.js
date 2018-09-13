@@ -117,7 +117,7 @@ class Cart extends Component {
 
         <div className='total'>
           <p>Total:</p>
-          {total}
+          ${total}.00
         </div>
 
         <div className="bottom-cart-div">

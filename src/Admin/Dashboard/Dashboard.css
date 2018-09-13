@@ -1,39 +1,59 @@
 .admin-page{
     width:100%;
-    height:80vh;
+    /* margin-right: 50px; */
+    height:90vh;
     display:grid;
-    grid-column-gap: 10px;
-    grid-row-gap: 20px;
+    background:#f3f0f0;
+    /* border: 1px solid black; */
+    grid-column-gap: 20px;
+    grid-row-gap: 25px;
     grid-template-columns: 10% 60% 1fr;
-    grid-template-rows: 15% 50% 1fr;
+    grid-template-rows: 10% 50% 1fr;
 }
 .main-nav{
+    margin-top: 10px;
+    margin-bottom: 20px;
     grid-area: 1/2;
-    background: navy;
+    /* width: 90%; */
+    background: rgb(228, 217, 217);
+    color: rgb(29, 27, 27);
+    font-size: 90%;
+    padding: 10px;
+    box-shadow: inset 0 0 10px #000000;
 }
 
 .admin-side-nav{
     background: teal;
-    grid-area: 2/1;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    grid-area: 1/1/4/1;
+    box-shadow: 0 10px 6px -6px #777;
     display: flex; 
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
 }
 
+.side-nav-content{
+    grid-area: 3/1;
+    background: teal;
+}
+
 .side-nav-display{
-    background: yellow;
+    background: teal;
     grid-area: 1/1;
     
 }
 
 .todo-body{
+    height: 90%;
+    width: 90%;
+    margin: 20px;
     background: orange;
+    box-shadow: inset 0 0 10px #000000;
     grid-area: 2/3;
-
     display:grid;
-    grid-template-rows: 1fr 200px 1fr;
-
+    grid-template-rows: 10% 1fr 10%;
 }
 
 .admin-right-nav{
@@ -41,41 +61,81 @@
     /* background: pink; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 5px;
+    grid-column-gap: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
 }
 
 .profit{
     grid-area: 1/2;
-    background: bisque;
+    background: rgb(189, 189, 165);
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    justify-content: center;
+    font-size: 85%;
+    box-shadow: inset 0 0 10px #000000;
+    /* margin: auto auto; */
 }
 
 .total-order{
     grid-area: 1/1;
-    background: beige;
+    background: rgb(189, 189, 165);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 10px #000000;
+    /* margin: auto auto; */
+}
+
+.month-profit{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(189, 189, 165);
+    justify-content: center;
+    box-shadow: inset 0 0 10px #000000;
+    /* margin: auto auto; */
+    /* background: rgb(155, 146, 204); */
 }
 
 .admin-graph{
-    background: lavender;
+    width: 90%;
+    margin:0 auto;
+    /* border: 1px solid black; */
+    /* background: rgb(241, 239, 239); */
     grid-area: 2/2;
     display:flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
+    box-shadow: inset 0 0 10px #000000;
     
 }
 
 .admin-order-history{
-    position: relative;
-    background: purple;
+    border: 2px solid black;
+    /* position: relative; */
+    margin-bottom: 15px;
+    background: rgb(240, 235, 235);
     grid-area: 3/2;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: scroll;
+    box-shadow: inset 0 0 10px #000000;
+}
+
+.order-history-header{
+    grid-area: 1/3/1/5
+}
+
+.ele-order{
+    grid-area: 2/1;
+    display: flex;
+    flex-direction: column;
 }
 
 .chart-data{
@@ -86,18 +146,31 @@
 .todo-submit-field{
     grid-area: 3/1;
     display:flex;
-    flex-direction: column;
-    width: 50%;
+    width: 100%;
     justify-content: center;
     align-items: center; 
 }
 
+.todo-content{
+    grid-area: 2/1;
+    width: 100%;
+}
+
+.todo-header{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .admin-order{
+    grid-area: 2/1/2/7;
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: 8% 20% 25% 10% 15% 15% 10%;
+    grid-template-rows: 80%;
     width: 90%;
-    height: 5%;
-    margin-top: 20px;
-    display:flex;
-    justify-content: space-between;
+    height: 30px;
 }
 
 .please-login{
@@ -112,32 +185,71 @@
     grid-area: 2/2
 }
 
+.calendar-component{
+    grid-area: 3/3;
+    margin: auto auto
+}
+
 
 @media(max-width: 415px){
     .admin-page{
         width: 100%;
-        height: 300vh;
+        height: 200vh;
         display: grid;
-        grid-template-rows: 5% 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 5% 20% 1fr 1fr 10% 10%;
         grid-template-columns: 1fr;
     }
     .main-nav{
-        grid-area: 1/1
+        grid-area: 1/1;
+        padding: 10px;
+        height: 100%;
+        margin-top:0px;
+        margin-bottom:0px;
+        /* width: 80%; */
+        font-size: 70%;
+        padding-top:10px;
+        font-size:80%
     }
     .admin-side-nav{
-        grid-area:5/1;
+        grid-area:6/1;
+        /* width: 80%; */
+        height: 100%;
+        padding-top: 0px;
+        padding-bottom:0px;
+        font-size: 0%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
     }
     .admin-graph{
-        grid-area: 2/1
+        margin-top:20px;
+        grid-area: 2/1;
+        /* width: 80%; */
+    }
+    .side-nav-content{
+        display: none;
     }
     .todo-body{
-        grid-area: 3/1
+        grid-area: 3/1;
+        padding: 0px 0px;
+        /* width: 80%; */
     }
     .admin-order-history{
-        grid-area: 4/1
+        width: 99%;
+        grid-area: 4/1;
+        font-size: 65%;
     }
     .admin-right-nav{
-        grid-area: 6/1
+        grid-area: 5/1;
+        /* width: 80%; */
+    }
+    .calendar-component{
+        grid-area:7/1;
+        display: none;
+        /* width: 80%; */
+    }
+    .profit{
+        font-size: 70%;
     }
 }
 
