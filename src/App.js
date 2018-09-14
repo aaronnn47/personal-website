@@ -9,6 +9,7 @@ class App extends Component {
   componentDidMount(){
     axios.get('/api/user-data')
   }
+  
   render() {
     return (
       <HashRouter>
