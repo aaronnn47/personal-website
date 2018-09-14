@@ -17,9 +17,10 @@ class Login extends Component{
         return(
             <div className="login-page">
                 <Header/>
+                
                 <div className="login">
                     <img src={logo} alt="" />   
-                    <button onClick={this.login}>Login</button>
+                    <button onClick={this.login}>Please Login</button>
                 </div>
                 <Footer/>
             </div>

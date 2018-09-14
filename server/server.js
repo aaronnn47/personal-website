@@ -10,17 +10,10 @@ const express = require('express'),
     fs = require('fs'),
     readline = require('readline'),
     {google} = require('googleapis')
-    // credentials = require('../server/credentials.json')
 
 const app = express()
 app.use(bodyParser.json())
 app.use(express.static(`${__dirname}/../build`))
-
-// app.get('*', (req,res)=>{
-//     res.sendFile(path.join(__dirname, '../build/index.html'))
-// })
-
-
 
 const {
     NODE_PORT,
@@ -34,71 +27,6 @@ const {
     PASSWORD,
 } = process.env
 
-// const SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
-// const TOKEN_PATH = 'token.json';
-
-// fs.readFile(`credentials.json`, (err, content) => {
-//     if (err) return console.log('Error loading client secret file:', err);
-//     // Authorize a client with credentials, then call the Gmail API.
-//     authorize(JSON.parse(content), listLabels);
-// });
-
-// function authorize(credentials, callback) {
-//     const {client_secret, client_id, redirect_uris} = credentials.installed;
-//     const oAuth2Client = new google.auth.OAuth2(
-//         client_id, client_secret, redirect_uris[0]);
-  
-//     // Check if we have previously stored a token.
-//     fs.readFile(TOKEN_PATH, (err, token) => {
-//       if (err) return getNewToken(oAuth2Client, callback);
-//       oAuth2Client.setCredentials(JSON.parse(token));
-//       callback(oAuth2Client);
-//     });
-// }
-
-// function getNewToken(oAuth2Client, callback) {
-//     const authUrl = oAuth2Client.generateAuthUrl({
-//       access_type: 'offline',
-//       scope: SCOPES,
-//     });
-//     console.log('Authorize this app by visiting this url:', authUrl);
-//     const rl = readline.createInterface({
-//       input: process.stdin,
-//       output: process.stdout,
-// });
-
-// rl.question('Enter the code from that page here: ', (code) => {
-//     rl.close();
-//       oAuth2Client.getToken(code, (err, token) => {
-//         if (err) return console.error('Error retrieving access token', err);
-//         oAuth2Client.setCredentials(token);
-//         // Store the token to disk for later program executions
-//         fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-//           if (err) return console.error(err);
-//           console.log('Token stored to', TOKEN_PATH);
-//         });
-//         callback(oAuth2Client);
-//       });
-//     });
-// }
-
-// function listLabels(auth) {
-//     const gmail = google.gmail({version: 'v1', auth});
-//     gmail.users.labels.list({
-//       userId: 'me',
-//     }, (err, res) => {
-//       if (err) return console.log('The API returned an error: ' + err);
-//       const labels = res.data.labels;
-//       if (labels.length) {
-//         console.log('Labels:');
-//         labels.forEach((label) => {
-//           console.log(`- ${label.name}`);
-//         });
-//       } else {
-//         console.log('No labels found.');
-//       }
-//     });
-// }
 
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
@@ -110,11 +38,11 @@ app.use(session({
     saveUninitialized: true
 }))
 
-app.use((request, response, next) => {
-    response.header("Access-Control-Allow-Origin", "*");
-    response.header("Access-Control-Allow-Headers", "Content-Type");
-    next();
-  });
+// app.use((request, response, next) => {
+//     response.header("Access-Control-Allow-Origin", "*");
+//     response.header("Access-Control-Allow-Headers", "Content-Type");
+//     next();
+//   });
 
 app.get('/auth/callback', async (req,res)=>{
     const payload = {
@@ -139,6 +67,8 @@ app.get('/auth/callback', async (req,res)=>{
         picture,
         sub
     } = resWithUserData.data
+
+    console.log(email)
 
     let db = req.app.get('db')
     let foundUser = await db.find_user([sub])
@@ -261,5 +191,7 @@ app.get('/api/getTodo',pc.getTodo)
 
 app.listen(NODE_PORT, () => {
     console.log(`listening on port ${NODE_PORT}`)
+    // console.log(process.env.AUTH_URI)
+
 })
 
