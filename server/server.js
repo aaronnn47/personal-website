@@ -6,10 +6,10 @@ const express = require('express'),
     axios = require('axios')
     pc = require('./controller/personal_controller'),
     nodemailer = require('nodemailer'),
+    path = require('path')
     fs = require('fs'),
     readline = require('readline'),
     {google} = require('googleapis')
-    // path = require('path')
     // credentials = require('../server/credentials.json')
 
 const app = express()
@@ -19,6 +19,8 @@ app.use(express.static(`${__dirname}/../build`))
 // app.get('*', (req,res)=>{
 //     res.sendFile(path.join(__dirname, '../build/index.html'))
 // })
+
+
 
 const {
     NODE_PORT,
@@ -130,7 +132,7 @@ app.get('/auth/callback', async (req,res)=>{
     let resWithUserData = await axios.get(
         `https://${REACT_APP_DOMAIN}/userinfo?access_token=${resWithToken.data.access_token}`
     )
-    // console.log('user data', resWithUserData)
+    console.log('user data', resWithUserData)
     let {
         email,
         name,
@@ -148,6 +150,7 @@ app.get('/auth/callback', async (req,res)=>{
         req.session.user = createdUser[0]
         res.redirect('/#/home')
     }
+
 })
 
 function envCheck(req,res,next){
@@ -237,6 +240,7 @@ app.get('/api/get-accessories',pc.getAccessories)
 app.get('/api/get-hat',pc.getHats)
 app.post('/api/addtocart',pc.addtocart)
 app.get('/api/getcart',pc.getcart)
+
 app.post('/api/payment',pc.handlePayment)
 app.delete(`/api/deleteItem/:id`,pc.deleteItem)
 app.post('/api/shippingInfo', pc.addShipping)
