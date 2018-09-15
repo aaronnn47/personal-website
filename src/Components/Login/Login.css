@@ -1,5 +1,5 @@
 .login-page{
-    height: 90vh;
+    height: 80vh;
     width: 100%;	
 }
 
@@ -10,11 +10,15 @@
 }
 
 .login > img{
-    margin: 80px 0;
+    /* margin: 80px 0; */
+    position: relative;
+    top: 80px;
     width: 70%;
 }
 
 .login > button{
+    position: relative;
+    top: 80px;
     width: 40%;
     height: 50px;
     margin: 20px 0;
