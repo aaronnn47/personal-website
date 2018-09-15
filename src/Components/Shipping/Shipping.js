@@ -101,7 +101,6 @@ class Shipping extends Component{
             <Link to='/checkout'
             onClick={()=>this.createShippingInfo()}
             >Next
-            
             </Link>
         </div>
         <Footer/>
