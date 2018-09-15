@@ -138,7 +138,7 @@ class Cart extends Component {
         </div>
         ): (
           <div className='cart-login-div'>
-          <p>Please Log In</p>
+          <p>Login To View Cart</p>
           <Link to='/'>Login</Link>
         </div>
         )
