@@ -1,13 +1,13 @@
 .cart{
+    position: relative;
+    top: 50px;
     width:100vw;
     height:90vh;
     padding-bottom: 50px;
-    margin-top: 50px;
 }
 .cart-container{
     height: 70%;
     width: 100%;
-    margin-top: 50px;
     padding-top: 10px;
     overflow: scroll;
     position: relative;
