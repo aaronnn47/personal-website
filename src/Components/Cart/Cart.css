@@ -77,9 +77,8 @@ img{
 .cart-login-div{
    width: 50%;
    height: 50%;
-   /* background: green; */
    margin: 0 auto;
-   margin-top: 350px;
+   margin-top: 310px;
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -90,9 +89,9 @@ img{
     width: 50%;
     height: 50px;
     margin-top: 20px;
-    padding-top: 15px;
-    padding-left: 20px;
-    /* background: orange; */
     border: 1px solid black;
     border-radius: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
