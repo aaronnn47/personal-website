@@ -68,7 +68,7 @@ class Home extends Component {
                 <Header/>
                 <div className="home-body">
                     <h1>Bitcoin</h1>
-                    {Math.round(this.state.crypto_data * 100) / 100}
+                    ${Math.round(this.state.crypto_data * 100) / 100}
                     <div>
                         <Line
                             data={data}

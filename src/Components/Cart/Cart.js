@@ -91,7 +91,7 @@ class Cart extends Component {
       return (
         <div key={i} className="mapped-cart">
           <img src={ele.image} alt="" />
-          <div className="ele">{ele.description}</div>
+          <div>{ele.description}</div>
           <img className='up' src={up} alt=''
           onClick={()=>this.addQuantity({id:ele.id})}
           />
@@ -100,7 +100,7 @@ class Cart extends Component {
           onClick={()=>this.removeQuanity(ele.cart_id)}
           />
 
-          <div>{ele.price}</div>
+          <div>{ele.price}.00</div>
           <img className='x' src={x} alt=""
           onClick={()=>{this.deleteCartItem(ele.id)}}
           />
