@@ -56,7 +56,7 @@ class Home extends Component {
             datasets:[
                 {
                     data: chartData,
-                    backgroundColor: 'yellow',
+                    backgroundColor: 'rgb(212, 212, 109)',
                     label: 'Bitcoin',
                     pointRadius: 0
 
@@ -80,10 +80,10 @@ class Home extends Component {
 
                 <div className="buy-sell">
                     <Link to='/buy'>
-                        <div>Buy</div>
+                        Buy
                     </Link>
                     <Link to='/sell'>
-                        <div>Sell</div>
+                        Sell
                     </Link>
                 </div>
                 <Footer/>
