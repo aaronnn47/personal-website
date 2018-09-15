@@ -17,9 +17,9 @@
     height: 20%;
     width: 100%;
     display: grid;
-    grid-template-columns: 20% 1fr 8% 5% 10% 10% 10%;
+    grid-template-columns: 20% 1fr 7% 5% 10% 10% 10%;
     grid-template-rows: 100%;
-    font-size: 100%;
+    font-size: 80%;
 }
 
 .bottom-cart-div{
@@ -38,12 +38,6 @@ img{
     height: auto;
 }
 
-.ele{
-    width: 10%;
-    font-size: 79%
-    
-}
-
 .total{
     width: 100%;
     height: 10%;;
@@ -55,17 +49,18 @@ img{
 }
 
 .x{
-    width:35%
+    width:35%;
+    margin-top: 2px;
 }
 
 .up{
-    width: 50%;
-    /* margin-left: 20px; */
+    width: 60%;
+    margin-top: 1px;
 }
 
 .down{
     width:40%;
-    /* margin-right: 20px; */
+    margin-top: 1px;
 }
 
 .proceed-to-checkout{
