@@ -6,7 +6,7 @@ import x from './error.svg'
 import up from './add.svg'
 import down from './remove.svg'
 import {connect} from 'react-redux'
-import {updateTotal} from '../../ducks/reducer'
+import {updateTotal, updateUser} from '../../ducks/reducer'
 import Header from '../../Views/Header/Header'
 import Footer from '../../Views/Footer/Footer'
 
@@ -30,7 +30,9 @@ class Cart extends Component {
       });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+    let res = await axios.get("/api/user-data");
+    this.props.updateUser(res.data);
     this.getCart()
   }
   
@@ -108,9 +110,14 @@ class Cart extends Component {
       );
     });
 
+    let {user} = this.props
+
     return (
+
       <div className='cart'>
         <Header/>
+        {user.user_name ? (
+        <div>
         <div className='cart-container'>
           {mappedcart}
         </div>
@@ -127,8 +134,16 @@ class Cart extends Component {
             >
             Proceed To Checkout
             </Link>
-            
         </div>
+        </div>
+        ): (
+          <div className='cart-login-div'>
+          <p>Please Log In</p>
+          <Link to='/'>Login</Link>
+        </div>
+        )
+        
+        }
         <Footer/>
       </div>
     );
@@ -137,8 +152,9 @@ class Cart extends Component {
 
 function mapStatetoProps(state){
   return{
-    total: state.total
+    total: state.total,
+    user: state.user
   }
 }
 
-export default connect(mapStatetoProps,{updateTotal})(Cart);
+export default connect(mapStatetoProps,{updateTotal, })(Cart);

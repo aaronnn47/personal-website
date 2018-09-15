@@ -37,3 +37,48 @@
     border-radius: 5%;
     align-items: center;
 }
+
+/* .account-login-div{
+    width: 40%;
+    height: 40%;
+    display: flex;
+    margin-top: 200px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+} */
+
+/* .account-login-div > a{
+    width: 50%;
+    height: 20%;
+    margin-top: 20px;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 5%;
+    padding-top: 10px;
+    padding-left: 13px;
+
+} */
+
+.account-login-div{
+    width: 50%;
+    height: 50%;
+    /* background: green; */
+    margin: 0 auto;
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+ }
+ 
+ .account-login-div > a{
+     width: 50%;
+     height: 20%;
+     margin-top: 20px;
+     padding-top: 10px;
+     padding-left: 20px;
+     /* background: orange; */
+     border: 1px solid black;
+     border-radius: 5%;
+ }
