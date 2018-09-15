@@ -114,10 +114,10 @@ class Cart extends Component {
 
     return (
 
-      <div className='cart'>
+      <div>
         <Header/>
         {user.user_name ? (
-        <div>
+        <div  className='cart'>
         <div className='cart-container'>
           {mappedcart}
         </div>
