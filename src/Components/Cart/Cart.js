@@ -157,4 +157,4 @@ function mapStatetoProps(state){
   }
 }
 
-export default connect(mapStatetoProps,{updateTotal, })(Cart);
+export default connect(mapStatetoProps,{updateTotal, updateUser})(Cart);
