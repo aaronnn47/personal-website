@@ -49,7 +49,6 @@ class Dashboard extends Component {
     if(previousState.orders !== this.state.orders){
       this.makeChartData([...this.state.orders])
     }
-    
   }
 
   getMonthTotal(obj){
@@ -143,7 +142,7 @@ class Dashboard extends Component {
         }
       ]
     };
-    
+
     const timestamp = Date.now();
     let newTimestamp = new Intl.DateTimeFormat("en-US", {
       year: "numeric",
@@ -195,11 +194,14 @@ class Dashboard extends Component {
             </div>
 
             <div className="admin-graph">
-              <h2>History</h2>
+              {/* <h2>History</h2> */}
               <Bar
                 data={data}
                 width={70}
-                height={35}
+                height={30}
+                options={{
+                  maintainAspectRatio: false
+                }}
                 // className="chart-data"
               />
               <Timestamp date="2018-09-08 05:21:00" format="full" />

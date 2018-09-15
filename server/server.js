@@ -50,7 +50,7 @@ app.get('/auth/callback', async (req,res)=>{
         client_secret: CLIENT_SECRET,
         code: req.query.code,
         grant_type: 'authorization_code',
-        redirect_uri: process.env.AUTH
+        redirect_uri: process.env.MY_AUTH
     }
 
     let resWithToken = await axios.post(
@@ -67,8 +67,6 @@ app.get('/auth/callback', async (req,res)=>{
         picture,
         sub
     } = resWithUserData.data
-
-    console.log(email)
 
     let db = req.app.get('db')
     let foundUser = await db.find_user([sub])
@@ -189,7 +187,7 @@ app.post('/api/adminLogin',pc.adminLogin)
 app.post('/api/todo',pc.addTodo)
 app.get('/api/getTodo',pc.getTodo)
 
-app.listen(NODE_PORT, () => {
+app.listen(process.env.NODE_PORT, () => {
     console.log(`listening on port ${NODE_PORT}`)
     // console.log(process.env.AUTH_URI)
 
