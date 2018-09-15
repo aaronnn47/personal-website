@@ -54,6 +54,7 @@ class Login extends Component{
     }
 
     render(){
+        console.log(this.state.password)
         return(
             <div className='admin-login-page'>
                 <div className='admin-login-main-content'>

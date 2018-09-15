@@ -189,7 +189,7 @@ app.get('/api/getTodo',pc.getTodo)
 
 app.listen(process.env.NODE_PORT, () => {
     console.log(`listening on port ${NODE_PORT}`)
-    // console.log(process.env.AUTH_URI)
+    // console.log(NODE_ENV)
 
 })
 
