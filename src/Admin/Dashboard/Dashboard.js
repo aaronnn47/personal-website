@@ -188,9 +188,10 @@ class Dashboard extends Component {
               <img src={calendar} alt="" />
               </Link>
               <p>Calendar</p>
-
+              <Link to='/admin/email'>
               <img src={email} alt="" />
               <p>Email</p>
+              </Link>
             </div>
 
             <div className="admin-graph">
